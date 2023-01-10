@@ -16,7 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-TextView tvName,tvUserName,tvemail;
+TextView tvName,tvUserName,tvemail,tvStreet,tvSuite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +24,8 @@ TextView tvName,tvUserName,tvemail;
         tvName=findViewById(R.id.textView);
         tvUserName=findViewById(R.id.textView2);
         tvemail=findViewById(R.id.textView3);
+        tvStreet=findViewById(R.id.textView4);
+        tvSuite=findViewById(R.id.textView5);
         String URL="https://jsonplaceholder.typicode.com/users";
 
          StringRequest request= new StringRequest(URL, new Response.Listener<String>() {
@@ -38,6 +40,11 @@ TextView tvName,tvUserName,tvemail;
                      tvName.setText(Name);
                      tvUserName.setText(Username);
                      tvemail.setText(Email);
+                     JSONObject jsonObject2=jsonArray.getJSONObject(0).getJSONObject("address");
+                     String phone=jsonObject2.getString("street");
+                     String Web=jsonObject2.getString("suite");
+                     tvStreet.setText(phone);
+                      tvSuite.setText(Web);
 
 
                  } catch (JSONException e) {
